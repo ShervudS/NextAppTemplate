@@ -1,0 +1,29 @@
+@mixin mixin-hover {
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin responsive-font(
+  $minFontSize,
+  $maxFontSize,
+  $max-wiewport: 1920,
+  $min-wiewport: 1440,
+  $liheH: 100,
+  $pixelsPerRem: 10,
+  $style: normal,
+  $weight: 400,
+  $family: $font-primary
+) {
+  $minWidth: $min-wiewport / $pixelsPerRem;
+  $maxWidth: $max-wiewport / $pixelsPerRem;
+
+  $slope: ($maxFontSize - $minFontSize) / ($maxWidth - $minWidth);
+  $yAxisIntersection: -$minWidth * $slope + $minFontSize;
+  $lineHeight: '#{$liheH}%';
+  $clampFunc: 'clamp(#{$minFontSize}rem, #{$yAxisIntersection}rem + #{$slope * 100}vw, #{$maxFontSize}rem)';
+
+  font: #{$style} #{$weight} #{$clampFunc}/#{$lineHeight} #{$family};
+}
