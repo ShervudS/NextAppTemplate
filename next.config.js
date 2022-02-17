@@ -14,7 +14,11 @@ const hashOnlyIdent = (context, _, exportName) =>
             'base64',
             5
         )
-        .replace(/^(-?\d|--)/, '_$1');
+        // replace invalid symbols with underscores instead of escaping
+        .replace(/[^a-zA-Z0-9-_]/g, '_')
+        // cannot start with a digit, two hyphens, or a hyphen followed by a digit
+        .replace(/^(\d|--|-\d)/, '__$1')
+
 
 module.exports = nextTranslate({
     webpack(config, { dev }) {

@@ -3,7 +3,9 @@ import MainLayout from '@components/MainLayout';
 
 const Home = () => {
     const { t } = useTranslation();
-    return <MainLayout> {t('titleH1')} </MainLayout>;
+    return <MainLayout> {t('titleH1')} 
+        <div>sfsdg</div>
+    </MainLayout>;
 };
 
 export default Home;
